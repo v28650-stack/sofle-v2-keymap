@@ -14,13 +14,13 @@ typedef enum {
 
 static sprite_mode_t current_sprite = SPRITE_DRAGON;
 
-// Frame pointers
-static const char PROGMEM *dragon_frames[] = {
+// Frame pointers — note: const on both the pointer and the data
+static const char * const PROGMEM dragon_frames[] = {
     dragon_frame_0, dragon_frame_1, dragon_frame_2, dragon_frame_3,
     dragon_frame_4, dragon_frame_5, dragon_frame_6, dragon_frame_7
 };
 
-static const char PROGMEM *bunny_frames[] = {
+static const char * const PROGMEM bunny_frames[] = {
     bunny_frame_0, bunny_frame_1, bunny_frame_2, bunny_frame_3,
     bunny_frame_4, bunny_frame_5, bunny_frame_6, bunny_frame_7
 };
@@ -28,6 +28,11 @@ static const char PROGMEM *bunny_frames[] = {
 #define FRAME_COUNT  8
 #define FRAME_DELAY  200
 #define ANIM_SIZE    128
+
+// Required by QMK even when using VIA
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [0] = LAYOUT_all(XXXXXXX)
+};
 
 void render_sprite(void) {
     if (timer_elapsed32(anim_timer) > FRAME_DELAY) {
@@ -42,8 +47,9 @@ void render_sprite(void) {
     }
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     render_sprite();
+    return false;
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {

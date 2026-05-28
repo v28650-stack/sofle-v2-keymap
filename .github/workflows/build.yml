@@ -28,7 +28,7 @@ jobs:
           path: userspace
      
       - name: Compile firmware
-        run: qmk compile -kb sofle/rev1 -km sofle-v2-keymap
+        qmk compile -kb sofle/rgb -km sofle-v2-keymap
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4

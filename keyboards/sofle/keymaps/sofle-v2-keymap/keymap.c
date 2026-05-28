@@ -2,6 +2,13 @@
 #include "dragon_sprites.h"
 #include "bunny_sprites.h"
 
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    }
+    return OLED_ROTATION_180;
+}
+
 // Animation state
 // static uint32_t anim_timer = 0;
 // static uint8_t current_frame = 0;
@@ -40,17 +47,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-void render_sprite(void) {
-    static const char PROGMEM test_frame[128] = {0xFF};
-
-    oled_write_raw_P(test_frame, sizeof(test_frame));
-}
-
 bool oled_task_user(void) {
-    render_sprite();
+    oled_clear();
+
+    oled_set_cursor(0, 0);
+    oled_write_P(PSTR("LEFT"), false);
+
+    oled_set_cursor(0, 2);
+    oled_write_P(PSTR("OLED TEST"), false);
+
     return false;
 }
-
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (clockwise) {
         tap_code(KC_VOLU);

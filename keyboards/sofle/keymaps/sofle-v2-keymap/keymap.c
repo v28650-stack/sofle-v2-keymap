@@ -46,17 +46,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool oled_task_user(void) {
     oled_clear();
-
-    if (is_keyboard_left()) {
-        oled_set_cursor(0, 0);
-        oled_write_P(PSTR("L"), false);
-    } else {
-        oled_set_cursor(0, 0);
-        oled_write_P(PSTR("R"), false);
-
-        oled_scroll_off(); // important: prevents Helios weird page offset
-    }
-
+    oled_set_cursor(0, 0);
+    oled_write_P(PSTR("TEST"), false);
     return false;
 }
 

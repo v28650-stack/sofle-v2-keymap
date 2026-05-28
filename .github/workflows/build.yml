@@ -1,0 +1,27 @@
+name: Build Sofle V2 Keymap
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build firmware
+        uses: qmk/qmk-action@v1
+        with:
+          keyboard: sofle/rev1
+          keymap: sofle-v2-keymap
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sofle-v2-firmware
+          path: "*.uf2"

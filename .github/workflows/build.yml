@@ -25,7 +25,12 @@ jobs:
       - name: Checkout userspace
         uses: actions/checkout@v4
         with:
-          path: keyboards/sofle/keymaps/sofle-v2-keymap
+          path: userspace
+
+      - name: Copy keymap files
+        run: |
+          mkdir -p keyboards/sofle/keymaps/sofle-v2-keymap
+          cp -r userspace/keyboards/sofle/keymaps/sofle-v2-keymap/* keyboards/sofle/keymaps/sofle-v2-keymap/
 
       - name: Compile firmware
         run: qmk compile -kb sofle/rev1 -km sofle-v2-keymap

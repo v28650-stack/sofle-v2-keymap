@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void render_sprite(void) {
-    static const char PROGMEM test_frame[512] = {0xFF};
+    static const char PROGMEM test_frame[128] = {0xFF};
 
     oled_write_raw_P(test_frame, sizeof(test_frame));
 }

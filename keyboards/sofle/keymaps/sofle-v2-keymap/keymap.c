@@ -3,8 +3,8 @@
 #include "bunny_sprites.h"
 
 // Animation state
-static uint32_t anim_timer = 0;
-static uint8_t current_frame = 0;
+// static uint32_t anim_timer = 0;
+// static uint8_t current_frame = 0;
 
 // Sprite selection
 typedef enum {
@@ -12,7 +12,7 @@ typedef enum {
     SPRITE_BUNNY  = 1
 } sprite_mode_t;
 
-static sprite_mode_t current_sprite = SPRITE_DRAGON;
+// static sprite_mode_t current_sprite = SPRITE_DRAGON;
 
 // Frame pointers — note: const on both the pointer and the data
 static const char * const PROGMEM dragon_frames[] = {
@@ -44,11 +44,6 @@ void render_sprite(void) {
     static const char PROGMEM test_frame[512] = {0xFF};
 
     oled_write_raw_P(test_frame, sizeof(test_frame));
-}
-
-bool oled_task_user(void) {
-    render_sprite();
-    return false;
 }
 
 bool oled_task_user(void) {

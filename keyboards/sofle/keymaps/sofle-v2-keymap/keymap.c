@@ -6,6 +6,11 @@
 // static uint32_t anim_timer = 0;
 // static uint8_t current_frame = 0;
 
+__attribute__((weak))
+oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
+    return OLED_ROTATION_0;
+}
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_0;
 }

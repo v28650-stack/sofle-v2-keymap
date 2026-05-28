@@ -2,14 +2,6 @@
 #include "dragon_sprites.h"
 #include "bunny_sprites.h"
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_left()) {
-        return OLED_ROTATION_0;
-    } else {
-        return OLED_ROTATION_180;
-    }
-}
-
 // Animation state
 // static uint32_t anim_timer = 0;
 // static uint8_t current_frame = 0;
@@ -53,16 +45,10 @@ bool oled_task_user(void) {
 
     if (is_keyboard_left()) {
         oled_set_cursor(0, 0);
-        oled_write_P(PSTR("LEFT"), false);
-
-        oled_set_cursor(0, 1);
-        oled_write_P(PSTR("SIDE"), false);
+        oled_write_P(PSTR("L"), false);
     } else {
         oled_set_cursor(0, 0);
-        oled_write_P(PSTR("RIGHT"), false);
-
-        oled_set_cursor(0, 1);
-        oled_write_P(PSTR("SIDE"), false);
+        oled_write_P(PSTR("R"), false);
     }
 
     return false;

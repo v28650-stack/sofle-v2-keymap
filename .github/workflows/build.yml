@@ -14,14 +14,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Build firmware
-        uses: qmk/qmk-action@v1
-        with:
-          keyboard: sofle/rev1
-          keymap: sofle-v2-keymap
+      - name: Install QMK CLI
+        run: pip3 install qmk
+
+      - name: Setup QMK
+        run: qmk setup -y
+
+      - name: Copy keymap into QMK
+        run: |
+          mkdir -p $HOME/qmk_firmware/keyboards/sofle/keymaps/sofle-v2-keymap
+          cp -r keyboards/sofle/keymaps/sofle-v2-keymap/* $HOME/qmk_firmware/keyboards/sofle/keymaps/sofle-v2-keymap/
+
+      - name: Compile firmware
+        run: qmk compile -kb sofle/rev1 -km sofle-v2-keymap
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
           name: sofle-v2-firmware
-          path: "*.uf2"
+          path: $HOME/qmk_firmware/*.uf2

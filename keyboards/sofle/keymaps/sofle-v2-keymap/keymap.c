@@ -6,6 +6,10 @@
 // static uint32_t anim_timer = 0;
 // static uint8_t current_frame = 0;
 
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_0;
+}
+
 // Sprite selection
 typedef enum {
     SPRITE_DRAGON = 0,
@@ -49,6 +53,8 @@ bool oled_task_user(void) {
     } else {
         oled_set_cursor(0, 0);
         oled_write_P(PSTR("R"), false);
+
+        oled_scroll_off(); // important: prevents Helios weird page offset
     }
 
     return false;

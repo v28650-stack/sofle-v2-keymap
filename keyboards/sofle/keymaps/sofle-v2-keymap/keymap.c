@@ -4,7 +4,7 @@
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
-        return OLED_ROTATION_270;
+        return OLED_ROTATION_180;
     }
     return OLED_ROTATION_0;
 }
@@ -52,18 +52,21 @@ bool oled_task_user(void) {
         oled_clear();
         oled_set_cursor(0, 0);
         oled_write_P(PSTR("MASTER"), false);
-        oled_set_cursor(0, 2);
-        oled_write_P(PSTR("LEFT SIDE"), false);
+
+        oled_set_cursor(0, 1);
+        oled_write_P(PSTR("LEFT"), false);
     } else {
         oled_clear();
         oled_set_cursor(0, 0);
         oled_write_P(PSTR("SLAVE"), false);
-        oled_set_cursor(0, 2);
-        oled_write_P(PSTR("RIGHT SIDE"), false);
+
+        oled_set_cursor(0, 1);
+        oled_write_P(PSTR("RIGHT"), false);
     }
 
     return false;
 }
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (clockwise) {
         tap_code(KC_VOLU);

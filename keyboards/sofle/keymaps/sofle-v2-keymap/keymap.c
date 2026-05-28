@@ -27,7 +27,7 @@ static const char * const PROGMEM bunny_frames[] = {
 
 #define FRAME_COUNT  8
 #define FRAME_DELAY  200
-#define ANIM_SIZE    128
+#define ANIM_SIZE    512
 
 // Required by QMK even when using VIA
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -41,16 +41,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void render_sprite(void) {
-    if (timer_elapsed32(anim_timer) > FRAME_DELAY) {
-        anim_timer = timer_read32();
-        current_frame = (current_frame + 1) % FRAME_COUNT;
-    }
-    oled_set_cursor(0, 0);
-    if (current_sprite == SPRITE_DRAGON) {
-        oled_write_raw_P(dragon_frames[current_frame], ANIM_SIZE);
-    } else {
-        oled_write_raw_P(bunny_frames[current_frame], ANIM_SIZE);
-    }
+    static const char PROGMEM test_frame[512] = {0xFF};
+
+    oled_write_raw_P(test_frame, sizeof(test_frame));
+}
+
+bool oled_task_user(void) {
+    render_sprite();
+    return false;
 }
 
 bool oled_task_user(void) {

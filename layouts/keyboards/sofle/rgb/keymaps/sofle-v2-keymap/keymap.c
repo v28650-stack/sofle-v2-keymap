@@ -7,7 +7,7 @@ static uint32_t timer = 0;
 
 #define FRAME_DELAY 200
 #define FRAME_COUNT 8
-#define SPRITE_SIZE 128
+#define SPRITE_SIZE 512
 
 static const char * const PROGMEM dragon_frames[] = {
     dragon_frame_0, dragon_frame_1, dragon_frame_2, dragon_frame_3,

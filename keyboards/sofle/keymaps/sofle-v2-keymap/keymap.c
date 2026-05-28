@@ -3,10 +3,11 @@
 #include "bunny_sprites.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_master()) {
-        return OLED_ROTATION_180;
+    if (is_keyboard_left()) {
+        return OLED_ROTATION_270;
+    } else {
+        return OLED_ROTATION_90;
     }
-    return OLED_ROTATION_0;
 }
 
 // Animation state
@@ -48,20 +49,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        oled_clear();
-        oled_set_cursor(0, 0);
-        oled_write_P(PSTR("MASTER"), false);
+    oled_clear();
 
-        oled_set_cursor(0, 1);
+    if (is_keyboard_left()) {
+        oled_set_cursor(0, 0);
         oled_write_P(PSTR("LEFT"), false);
-    } else {
-        oled_clear();
-        oled_set_cursor(0, 0);
-        oled_write_P(PSTR("SLAVE"), false);
 
         oled_set_cursor(0, 1);
+        oled_write_P(PSTR("SIDE"), false);
+    } else {
+        oled_set_cursor(0, 0);
         oled_write_P(PSTR("RIGHT"), false);
+
+        oled_set_cursor(0, 1);
+        oled_write_P(PSTR("SIDE"), false);
     }
 
     return false;

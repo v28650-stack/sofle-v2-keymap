@@ -35,7 +35,7 @@ jobs:
           cp -r userspace/keyboards/sofle/rgb/keymaps/sofle-v2-keymap/* keyboards/sofle/rgb/keymaps/sofle-v2-keymap/
 
       - name: Compile firmware
-        run: qmk compile -kb sofle/rgb -km sofle-v2-keymap
+        run: qmk compile -kb sofle/rev1 -km sofle-v2-keymap -e CONVERT_TO=helios
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4

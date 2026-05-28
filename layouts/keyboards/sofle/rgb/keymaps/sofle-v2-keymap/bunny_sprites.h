@@ -1,17 +1,37 @@
 #pragma once
 
-#include <stdint.h>
 #include <avr/pgmspace.h>
 
-#define SPRITE_WIDTH 128
-#define SPRITE_HEIGHT 32
-#define SPRITE_SIZE (SPRITE_WIDTH * SPRITE_HEIGHT / 8)
+#define SPRITE_SIZE 512
 
-static const unsigned char PROGMEM bunny_frame_0[] = { /* frame 0 data */ };
-static const unsigned char PROGMEM bunny_frame_1[] = { /* frame 1 data */ };
-static const unsigned char PROGMEM bunny_frame_2[] = { /* frame 2 data */ };
-static const unsigned char PROGMEM bunny_frame_3[] = { /* frame 3 data */ };
-static const unsigned char PROGMEM bunny_frame_4[] = { /* frame 4 data */ };
-static const unsigned char PROGMEM bunny_frame_5[] = { /* frame 5 data */ };
-static const unsigned char PROGMEM bunny_frame_6[] = { /* frame 6 data */ };
-static const unsigned char PROGMEM bunny_frame_7[] = { /* frame 7 data */ };
+static const unsigned char PROGMEM bunny_frame_0[] = {
+    [0 ... 511] = 0x00
+};
+
+static const unsigned char PROGMEM bunny_frame_1[] = {
+    [0 ... 511] = 0xFF
+};
+
+static const unsigned char PROGMEM bunny_frame_2[] = {
+    [0 ... 511] = 0xCC
+};
+
+static const unsigned char PROGMEM bunny_frame_3[] = {
+    [0 ... 511] = 0x33
+};
+
+static const unsigned char PROGMEM bunny_frame_4[] = {
+    [0 ... 511] = 0xAA
+};
+
+static const unsigned char PROGMEM bunny_frame_5[] = {
+    [0 ... 511] = 0x55
+};
+
+static const unsigned char PROGMEM bunny_frame_6[] = {
+    [0 ... 511] = 0x0F
+};
+
+static const unsigned char PROGMEM bunny_frame_7[] = {
+    [0 ... 511] = 0xF0
+};
